@@ -1,9 +1,26 @@
+import { useEffect, useState } from 'react'
+import { getTaskRequest } from '../services/taskService'
+import { Task } from '../interfaces/task.interface'
+import TaskItem from './TaskItem'
 
-type Props = {}
+const TaskList = () => {
+  const [tasks, setTasks] = useState<Task[]>([])
 
-const TaskList = (props: Props) => {
+  useEffect(() => {
+    const getAllTasks = async () => {
+      const res = await getTaskRequest()
+      const data = await res.json()
+      setTasks(data)
+    }
+
+    getAllTasks()
+  }, [])
   return (
-    <div>TaskList</div>
+    <div>
+      {tasks.map(task => (
+        <TaskItem task={task} key={task._id}/>
+      ))}
+    </div>
   )
 }
 
