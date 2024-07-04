@@ -1,5 +1,7 @@
 import { useTasks } from '../context/useTasks'
 import { Task } from '../interfaces/task.interface'
+import { IoCheckmarkDone } from 'react-icons/io5'
+import { FaRegTrashCan } from 'react-icons/fa6'
 
 type Props = {
   task: Task
@@ -15,10 +17,11 @@ const TaskItem = ({ task }: Props) => {
         <p>{task.description}</p>
       </div>
       <div className='flex gap-2'>
-        <button onClick={() => updateTask(task._id, { done: !task.done })}>
-          Update
-        </button>
-        <button onClick={() => deleteTask(task._id)}>Delete</button>
+        <IoCheckmarkDone
+          className={`${task.done ? 'text-green-700' : 'text-white'} text-xl`}
+          onClick={() => updateTask(task._id, { done: !task.done })}
+        ></IoCheckmarkDone>
+        <FaRegTrashCan onClick={() => deleteTask(task._id)}></FaRegTrashCan>
       </div>
     </div>
   )

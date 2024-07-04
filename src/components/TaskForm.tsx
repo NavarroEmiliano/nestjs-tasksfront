@@ -24,6 +24,11 @@ const TaskForm = () => {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     createTask(task)
+    setTask({
+      title: '',
+      description: '',
+      done: false
+    })
   }
 
   return (
@@ -34,6 +39,7 @@ const TaskForm = () => {
           name='title'
           className='border-2 border-gray-700 p-2 rounded-lg bg-zinc-800 block w-full my-2 '
           placeholder='Write a title'
+          value={task.title}
           onChange={handleChange}
         />
 
@@ -42,6 +48,7 @@ const TaskForm = () => {
           rows={3}
           className='border-2 border-gray-700 p-2 rounded-lg bg-zinc-800 block w-full my-2 '
           placeholder='Write a description'
+          value={task.description}
           onChange={handleChange}
         ></textarea>
         <label htmlFor='done' className='inline-flex items-center gap-x-2'>
